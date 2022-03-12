@@ -32,7 +32,7 @@ public class indexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<VideoDTO> list = VideoDAO.getInstance().selectAll();
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("Videos/total-video.jsp").forward(request, response);
+		request.getRequestDispatcher("/Videos/total-video.jsp").forward(request, response);
 	}
 
 	/**

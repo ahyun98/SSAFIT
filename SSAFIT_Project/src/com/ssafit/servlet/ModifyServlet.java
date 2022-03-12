@@ -11,19 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ssafit.dao.CommentDAO;
 import com.ssafit.dao.CommentDTO;
-import com.ssafit.dao.VideoDAO;
 
 /**
- * Servlet implementation class CommentController
+ * Servlet implementation class ModifyServlet
  */
-@WebServlet("/commentInsert")
-public class CommentController extends HttpServlet {
+@WebServlet("/modify")
+public class ModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentController() {
+    public ModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,6 +31,12 @@ public class CommentController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		int no = Integer.parseInt(request.getParameter("no"));
+		CommentDTO comment = CommentDAO.getInstance().selectOne(no);
+		request.setAttribute("commenteach", comment);
+		request.getRequestDispatcher("/Videos/modify.jsp").forward(request, response);
 	}
 
 	/**
@@ -39,18 +44,19 @@ public class CommentController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		// doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
-		String id = request.getParameter("videoid");
-		System.out.println("여기"+id);
+		int no = Integer.parseInt(request.getParameter("no"));
+		String id = request.getParameter("id");
 		String writer = request.getParameter("writer");
 		String comment = request.getParameter("comment");
-		request.setAttribute("id", id);
-		CommentDAO.getInstance().insert(new CommentDTO(id,writer,comment));
+		System.out.println("dopost에서 comment : "+comment);
+		CommentDAO.getInstance().modify(no,id,writer,comment);
+		System.out.println("수정 id"+id);
 		List<CommentDTO> comments = CommentDAO.getInstance().SelectById(id);
 		request.setAttribute("comments", comments);
-		request.getRequestDispatcher("Videos/detail.jsp").forward(request, response);
-		
-		
+		request.setAttribute("url", id);
+		request.getRequestDispatcher("/Videos/detail.jsp").forward(request, response);
 	}
 
 }

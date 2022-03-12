@@ -20,7 +20,8 @@ public class CommentDAO {
 	//댓글 삽입 기능
 	public void insert(CommentDTO comment) {
 		list.add(comment);
-		comment.setNo(++no);
+		no++;
+		comment.setNo(no);
 	}
 	
 	//id별로 댓글 보기
@@ -41,17 +42,27 @@ public class CommentDAO {
 		return result;
 	}
 	
+	public CommentDTO selectOne(int no) {
+		for(CommentDTO c : list) {
+			if( no == c.getNo() ) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	
 	//댓글 수정하기
-	public void modify(CommentDTO comment) {
+	public void modify(int no,String id, String writer, String comment) {
 		CommentDTO origin;
-		for (int i = 0; i < list.size(); i++) {
-			if(list.get(i).getNo() == comment.getNo()) {
-				origin = list.get(i);
-				origin.setWriter(comment.getWriter());
-				origin.setComment(comment.getComment());
+		for(CommentDTO c : list) {
+			if( no == c.getNo() ) {
+				System.out.println("no같은거 찾았어요");
+				origin = c;
+				origin.setWriter(writer);
+				origin.setComment(comment);
 				return;
 			}
-			return;
 		}
 		
 	}

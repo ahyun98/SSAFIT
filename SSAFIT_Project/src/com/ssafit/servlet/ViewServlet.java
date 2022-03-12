@@ -37,7 +37,7 @@ public class ViewServlet extends HttpServlet {
 		request.setAttribute("id", id);
 		request.setAttribute("url", url);
 		request.setAttribute("comments", comments);
-		request.getRequestDispatcher("Videos/detail.jsp").forward(request, response);
+		request.getRequestDispatcher("/Videos/detail.jsp").forward(request, response);
 	}
 
 	/**

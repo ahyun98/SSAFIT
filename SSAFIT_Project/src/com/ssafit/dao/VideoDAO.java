@@ -53,7 +53,7 @@ public class VideoDAO {
 	}
 	// sortViewNum (조회수별 영상 정렬)
 	public List<VideoDTO> sortViewNum() {
-		Collections.sort(list, Collections.reverseOrder());
+//		Collections.sort(list, Collections.reverseOrder());
 		return list;
 	}
 }
