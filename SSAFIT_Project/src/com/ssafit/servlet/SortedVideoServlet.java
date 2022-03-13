@@ -35,12 +35,12 @@ public class SortedVideoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		List<VideoDTO> listViewNum = VideoDAO.getInstance().sortViewNum();
+
 		List<VideoDTO> listUpper = VideoDAO.getInstance().selectPart("상체");
 		List<VideoDTO> listLower = VideoDAO.getInstance().selectPart("하체");
 		List<VideoDTO> listWhole = VideoDAO.getInstance().selectPart("전신");
 		List<VideoDTO> listMid = VideoDAO.getInstance().selectPart("복부");
-		request.setAttribute("listViewNum", listViewNum);
+
 		request.setAttribute("listUpper", listUpper);
 		request.setAttribute("listLower", listLower);
 		request.setAttribute("listWhole", listWhole);

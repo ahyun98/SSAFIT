@@ -28,7 +28,7 @@ public class CommentDAO {
 	public List<CommentDTO> SelectById(String videoid){
 		List<CommentDTO> result = new ArrayList<CommentDTO>();
 		if(videoid==null) {
-			System.out.println("videoid없음");
+
 			return null;
 		}
 		for (int i = 0; i < list.size(); i++) {
@@ -57,7 +57,6 @@ public class CommentDAO {
 		CommentDTO origin;
 		for(CommentDTO c : list) {
 			if( no == c.getNo() ) {
-				System.out.println("no같은거 찾았어요");
 				origin = c;
 				origin.setWriter(writer);
 				origin.setComment(comment);

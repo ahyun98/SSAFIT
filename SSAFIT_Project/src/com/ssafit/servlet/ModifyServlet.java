@@ -34,7 +34,11 @@ public class ModifyServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		int no = Integer.parseInt(request.getParameter("no"));
+		String id = request.getParameter("videoid");
+		List<CommentDTO> comments = CommentDAO.getInstance().SelectById(id);
+		request.setAttribute("comments", comments);
 		CommentDTO comment = CommentDAO.getInstance().selectOne(no);
+		request.setAttribute("id", id);
 		request.setAttribute("commenteach", comment);
 		request.getRequestDispatcher("/Videos/modify.jsp").forward(request, response);
 	}
@@ -50,12 +54,10 @@ public class ModifyServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String writer = request.getParameter("writer");
 		String comment = request.getParameter("comment");
-		System.out.println("dopost에서 comment : "+comment);
 		CommentDAO.getInstance().modify(no,id,writer,comment);
-		System.out.println("수정 id"+id);
 		List<CommentDTO> comments = CommentDAO.getInstance().SelectById(id);
 		request.setAttribute("comments", comments);
-		request.setAttribute("url", id);
+		request.setAttribute("id", id);
 		request.getRequestDispatcher("/Videos/detail.jsp").forward(request, response);
 	}
 

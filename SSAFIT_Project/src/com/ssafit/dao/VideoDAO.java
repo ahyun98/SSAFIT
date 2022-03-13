@@ -2,6 +2,7 @@ package com.ssafit.dao;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class VideoDAO {
@@ -52,8 +53,10 @@ public class VideoDAO {
 		return list_part;
 	}
 	// sortViewNum (조회수별 영상 정렬)
-	public List<VideoDTO> sortViewNum() {
-//		Collections.sort(list, Collections.reverseOrder());
-		return list;
-	}
+	// sortViewNum (조회수별 영상 정렬)
+    public List<VideoDTO> sortViewNum() {
+        Comparator<VideoDTO> compareByViewNum = (VideoDTO v1, VideoDTO v2) -> ((Integer) v1.getViewNum()).compareTo( (Integer) v2.getViewNum() );
+        Collections.sort(list, compareByViewNum.reversed());
+        return list;
+    }
 }
